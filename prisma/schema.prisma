@@ -1,0 +1,22 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model ReleaseNote {
+  id        Int      @id @default(autoincrement())
+  githubId  String   @unique
+  title     String
+  body      String?
+  author    String
+  mergedAt  DateTime @default(now())
+  
+  // New details you requested
+  repoName  String   // e.g., "tekion/backend-service"
+  repoUrl   String   // e.g., "https://github.com/tekion/backend-service"
+  prUrl     String   // e.g., "https://github.com/tekion/backend-service/pull/42"
+}
